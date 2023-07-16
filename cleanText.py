@@ -23,11 +23,11 @@ def text_clean(text):
 
 
 def clearColumns(data):
-    clearProvinceName = ["TINH ", "T.",
+    clearProvinceName = ['TINHTP',"TINH ", "T.",
                          "THANH PHO ", "THANHPHO ", "TP ", "TP."]
-    clearDistrictName = ["HUYEN ", "H.", "QUAN ", "Q.", "THANH PHO ",
+    clearDistrictName = ['QUANHUYEN',"HUYEN ", "H.", ' Q ','Q ',"QUAN ", "Q.", "THANH PHO ",
                          "THANHPHO ", "TP ", "TP.", "TX.", "TX", "THI XA", "THI XA."]
-    clearCivilName = ["XA ", "X.", "XA.", "PHUONG ", " P.", " P-", " P ",
+    clearCivilName = ['PHUONGXA',"XA ", "X.", "XA.", "PHUONG ", " P.", " P-", " P ",
                       "X .", "TT.", "TT ", "T.T", "AP ", "AP.", "THI TRAN", "F.", "F "]
     clearListName = []
     dataAnalysis = data
