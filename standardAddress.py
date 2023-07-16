@@ -49,7 +49,6 @@ def checkValidAddressElement(listTest, address):
         i += 1
     if minPoint < 90:
         listTemp[minIndex] = " "
-
         return listTemp
     else:
         return listTemp

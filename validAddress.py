@@ -32,33 +32,36 @@ class ValidAddress:
     def check_province(self, full_address):
         result = None
         address_list = full_address.split(',')
+        address_list.reverse()
         for add in address_list:
             add = add.strip().upper()
             if add in self.address.keys():
                 result = add
-                full_address = full_address.replace(add, '')
+                full_address = full_address.replace(add, '',1)
                 break
         return full_address, result
 
     def check_district(self, full_address, province):
         result = None
         address_list = full_address.split(',')
+        address_list.reverse()
         for add in address_list:
             add = add.strip().upper()
             if add in self.address[province].keys():
                 result = add
-                full_address = full_address.replace(add, '')
+                full_address = full_address.replace(add, '',1)
                 break
         return full_address, result
 
     def check_ward(self, full_address, province, district):
         result = None
         address_list = full_address.split(',')
+        address_list.reverse()
         for add in address_list:
             add = add.strip().upper()
             if add in self.address[province][district]:
                 result = add
-                full_address = full_address.replace(add, '')
+                full_address = full_address.replace(add, '',1)
                 break
         return full_address, result
 

@@ -32,7 +32,8 @@ def clearColumns(data):
     clearListName = []
     dataAnalysis = data
     clearListName = clearProvinceName + clearDistrictName + clearCivilName
-    clearListName = set(clearListName)
+    # clearListName = set(clearListName)
+    # print(clearListName)
     for item in clearListName:
         dataAnalysis = dataAnalysis.replace(item, "")
     return dataAnalysis.lstrip().rstrip()

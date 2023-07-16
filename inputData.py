@@ -44,5 +44,4 @@ def textTransfer(text):
 
 if __name__ == "__main__":
     provinceList, districtList, civilList = parseLocation()
-    print(districtList)
     print(textTransfer(textTest))
