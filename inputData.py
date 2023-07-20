@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from cleanText import text_clean, clearColumns
+import json
 textTest = ". KHU PHO TAN BINH P.TAN BINH HUYEN DONG XOAI BINH PHUOC"
 filename = "data/provinceLib.csv"
 renameObject = {
@@ -9,6 +10,8 @@ renameObject = {
     "Phường Xã": "civil",
     "Cấp": "civil_level"
 }
+with open('./abbreviation.json') as f:
+    provinceAbbreviation = json.load(f)
 df = pd.read_csv(filename)
 df = df.rename(index=str, columns=renameObject)
 
@@ -19,9 +22,13 @@ def parseLocation():
     civilList = [text_clean(item) for item in df["civil"].unique()]
     return provinceList, districtList, civilList
 
-
+provinceList, districtList, civilList = parseLocation()
 def textTransfer(text):
-    provinceList, districtList, civilList = parseLocation()
+    listTemp = text.split()
+    for i in range(len(listTemp)):
+        if (listTemp[i] in provinceAbbreviation):
+            listTemp[i] = provinceAbbreviation[listTemp[i]]
+    text = ' '.join(listTemp)
     textTemp = text_clean(text)
     textFinal = textTemp
     for item in provinceList:
@@ -44,4 +51,4 @@ def textTransfer(text):
 
 if __name__ == "__main__":
     provinceList, districtList, civilList = parseLocation()
-    print(textTransfer(textTest))
+    print(textTransfer('TO 1 TAN LAP-PHUONG PHUONG DONG-THANH PHO UONG BI-TINH QUANG NINH-VIET NAM'))

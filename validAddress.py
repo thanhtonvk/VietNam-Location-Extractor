@@ -12,16 +12,14 @@ def load_address():
         province = unidecode.unidecode(provinces[i]).upper()
         district = unidecode.unidecode(districts[i]).upper()
         ward = unidecode.unidecode(wards[i]).upper()
-
         if not province in address.keys():
             address[province] = {}
+
+        if not district in address[province].keys():
             address[province][district] = []
+            address[province][district].append(ward)
         else:
-            if not district in address[province].keys():
-                address[province][district] = []
-                address[province][district].append(ward)
-            else:
-                address[province][district].append(ward)
+            address[province][district].append(ward)
     return address
 
 

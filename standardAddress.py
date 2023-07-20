@@ -9,7 +9,7 @@ with open('./abbreviation.json') as f:
 
 
 def normalizeAddress(listAddress):
-    listTemp = [clearColumns(item) for item in listAddress]
+    listTemp = [item for item in listAddress]
     for i in range(len(listTemp)):
         if (listTemp[i] in provinceAbbreviation):
             listTemp[i] = provinceAbbreviation[listTemp[i]]
@@ -17,7 +17,7 @@ def normalizeAddress(listAddress):
 
 
 def addressList(provinceName):
-    addressGoals = pd.read_csv(provinceName)
+    addressGoals = pd.read_csv(provinceName).astype(str)
     addressGoals["address"] = addressGoals['Phường Xã'] + ', ' + \
         addressGoals['Quận Huyện'] + ', ' + addressGoals['Tỉnh Thành Phố']
     return list(addressGoals["address"])

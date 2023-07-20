@@ -28,12 +28,15 @@ def clearColumns(data):
     clearDistrictName = ['QUANHUYEN',"HUYEN ", "H.", ' Q ','Q ',"QUAN ", "Q.", "THANH PHO ",
                          "THANHPHO ", "TP ", "TP.", "TX.", "TX", "THI XA", "THI XA."]
     clearCivilName = ['PHUONGXA',"XA ", "X.", "XA.", "PHUONG ", " P.", " P-", " P ",
-                      "X .", "TT.", "TT ", "T.T", "AP ", "AP.", "THI TRAN", "F.", "F "]
+                      "X .", "TT.", "TT ", "T.T",  "THI TRAN", "F.", "F "]
     clearListName = []
     dataAnalysis = data
     clearListName = clearProvinceName + clearDistrictName + clearCivilName
     # clearListName = set(clearListName)
     # print(clearListName)
     for item in clearListName:
-        dataAnalysis = dataAnalysis.replace(item, "")
+        if item=='PHUONG ' or item =='XA ' or item=='QUAN ' or item=='TINH ':
+            dataAnalysis = dataAnalysis.replace(item, "",1)
+        else:
+            dataAnalysis = dataAnalysis.replace(item, "")
     return dataAnalysis.lstrip().rstrip()
