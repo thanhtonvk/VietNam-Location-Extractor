@@ -35,16 +35,17 @@ def textTransfer(text):
         if (item in textTemp):
             textTemp = textTemp.replace(item, "")
             textFinal = textFinal.replace(item, ","+item)
+            break
     for item in districtList:
         if (item in textTemp):
             textTemp = textTemp.replace(item, "")
             textFinal = textFinal.replace(item, ","+item)
-   
+            break
     for item in civilList:
         if (item in textTemp):
             textTemp = textTemp.replace(item, "")
             textFinal = textFinal.replace(item, ","+item)
-   
+            break
     return clearColumns(textFinal)
 
 
