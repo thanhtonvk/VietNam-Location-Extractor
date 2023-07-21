@@ -1,3 +1,4 @@
+
 import unicodedata
 import unidecode
 vietnamletters = ["a", "á", "à", "ả", "ạ", "ã", "ă", "ắ", "ằ", "ẳ", "ặ", "ẵ", "â", "ấ", "ầ", "ẩ", "ậ", "ẫ", "b",
@@ -22,21 +23,39 @@ def text_clean(text):
     return text
 
 
-def clearColumns(data):
-    clearProvinceName = ['TINHTP',"TINH ", "T.",
+def clearColumns(dataAnalysis):
+    clearProvinceName = ['TINHTP', "TINH ", "T.",
                          "THANH PHO ", "THANHPHO ", "TP ", "TP."]
-    clearDistrictName = ['QUANHUYEN',"HUYEN ", "H.", ' Q ','Q ',"QUAN ", "Q.", "THANH PHO ",
+    clearDistrictName = ['QUANHUYEN', "HUYEN ", "H.", ' Q ', 'Q ', "QUAN ", "Q.", "THANH PHO ",
                          "THANHPHO ", "TP ", "TP.", "TX.", "TX", "THI XA", "THI XA."]
-    clearCivilName = ['PHUONGXA',"XA ", "X.", "XA.", "PHUONG ", " P.", " P-", " P ",
+    clearCivilName = ['PHUONGXA', "XA ", "X.", "XA.", "PHUONG ", " P.", " P-", " P ",
                       "X .", "TT.", "TT ", "T.T",  "THI TRAN", "F.", "F "]
-    clearListName = []
-    dataAnalysis = data
-    clearListName = clearProvinceName + clearDistrictName + clearCivilName
-    # clearListName = set(clearListName)
-    # print(clearListName)
-    for item in clearListName:
-        if item=='PHUONG ' or item =='XA ' or item=='QUAN ' or item=='TINH ':
-            dataAnalysis = dataAnalysis.replace(item, "",1)
+
+    dict_address = {'HT': 'HUYEN TINH', 'XT': 'XA TINH', 'XH': 'XA HUYEN',
+                    'HDICT': 'HUYEN QUAN', 'PX': 'PHUONG XA', 'XP': 'XA PHUONG','P$DIC':'PHUONG QUAN'}
+    for dict in dict_address.keys():
+        dataAnalysis = dataAnalysis.replace(dict_address[dict], dict)
+    for item in clearProvinceName:
+        if item == 'TINH ':
+            dataAnalysis = dataAnalysis.replace(item, "", 1)
         else:
             dataAnalysis = dataAnalysis.replace(item, "")
+    for item in clearDistrictName:
+        if item == 'QUAN ' or item == 'HUYEN ':
+            dataAnalysis = dataAnalysis.replace(item, "", 1)
+        else:
+            dataAnalysis = dataAnalysis.replace(item, "")
+    for item in clearCivilName:
+        if item == 'XA ' or item == 'PHUONG ':
+            dataAnalysis = dataAnalysis.replace(item, '', 1)
+        else:
+            dataAnalysis = dataAnalysis.replace(item, '')
+    for dict in dict_address.keys():
+        dataAnalysis = dataAnalysis.replace(dict,dict_address[dict].split()[1])
     return dataAnalysis.lstrip().rstrip()
+
+
+if __name__ == "__main__":
+    value = clearColumns(
+        'TO 2 TRAN THANH NGO KIEN AN HAI PHONG')
+    print(value)
